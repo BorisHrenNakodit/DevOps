@@ -19,3 +19,4 @@ terraform.rc         -игнорировать файлы terraform в любо�
 
 
 DevOps all task
+task_3_branches_FIX
