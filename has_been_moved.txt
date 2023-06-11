@@ -1,2 +1,4 @@
 will_be_moved
 line_IDE_VS_Code_
+second line VS_code
+the third line VS_code_amend
