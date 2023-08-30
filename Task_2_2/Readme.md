@@ -45,19 +45,11 @@ on linux_amd64
   libyaml = True  
 
 ## Задание 4
-При попытки vagrant provision возникает ошибка
-
-![Ошибка](image/photo_2023-08-29_08-48-25.jpg)
 
 
-fatal: [server1.netology]: UNREACHABLE! => {“changed”: false, “msg”: “Failed to connect to the host via ssh: ssh: Could not resolve hostname volume/git_repository/virtualmachine/1/vagrant/.vagrant/machines/server1.netology/virtualbox/private: Name or service not known”, “unreachable”: true}
 
 
-### Vagrantfile  
-![Vagrantfile](image/photo_2023-08-29_10-28-06.jpg)
-### provision.yml 
-![provision](image/photo_2023-08-29_11-53-51.jpg)
-### Ansible.cfg 
-![Ansible](image/photo_2023-08-29_10-28-06.jpg)
-### Inventory  
-![Inventory](image/photo_2023-08-29_12-08-03.jpg)
+### Complete ansible 
+![Vagrantfile](image/photo_20-08-2023.jpg)
+### Version 
+![provision](image/photo_2023-08-29_2.jpg)
