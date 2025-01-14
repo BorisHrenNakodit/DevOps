@@ -21,13 +21,13 @@ resource "random_password" "random_string" {
 }
 
 
-resource "docker_image" "nginx"{
+resource "docker_image" "nginx_image"{
   name         = "nginx:latest"
   keep_locally = true
 }
 
 resource "docker_container" "nginx" {
-  image = docker_image.nginx.image_id
+  image = docker_image.nginx_image.image_id
   name  = "hello_world"
 
   ports {
