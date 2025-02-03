@@ -1,6 +1,23 @@
 #Network
 resource "yandex_vpc_network" "develop" {
-  name = var.vpc_name
+  name      = var.vpc_name
+  folder_id = var.folder_id
+}
+
+resource "yandex_vpc_gateway" "nat_gateway" {
+  folder_id      = var.folder_id
+  name = "test-gateway"
+  shared_egress_gateway {}
+}
+resource "yandex_vpc_route_table" "rt" {
+  folder_id      = var.folder_id
+  name           = "test-route-table"
+  network_id     = yandex_vpc_network.develop.id
+
+  static_route {
+    destination_prefix = "0.0.0.0/0"
+    gateway_id         = yandex_vpc_gateway.nat_gateway.id
+  }
 }
 
 #Первая подсеть
@@ -9,6 +26,8 @@ resource "yandex_vpc_subnet" "vm_web_develop" {
   zone           = var.vm_web_default_zone
   network_id     = yandex_vpc_network.develop.id
   v4_cidr_blocks = var.vm_web_default_cidr
+  folder_id      = var.folder_id
+  route_table_id = yandex_vpc_route_table.rt.id
 }
 
 
@@ -22,6 +41,8 @@ data "yandex_compute_image" "vm_web_ubuntu" {
 resource "yandex_compute_instance" "vm_web_platform" {
   name        = var.vm_web_inst_name
   platform_id = var.vm_web_inst_platfor_id
+  zone        = var.vm_web_default_zone
+
   resources {
     cores         = var.vms_resources.web.core
     memory        = var.vms_resources.web.ram
@@ -37,7 +58,7 @@ resource "yandex_compute_instance" "vm_web_platform" {
   }
   network_interface {
     subnet_id = yandex_vpc_subnet.vm_web_develop.id
-    nat       = true
+    nat       = false
   }
 
   metadata = {
@@ -66,6 +87,7 @@ resource "yandex_vpc_subnet" "vm_db_develop" {
 resource "yandex_compute_instance" "vm_db_platform" {
   name        = var.vm_db_inst_name
   platform_id = var.vm_db_inst_platfor_id
+  zone        = var.vm_db_default_zone
   resources {
     cores         = var.vms_resources.db.core
     memory        = var.vms_resources.db.ram
@@ -80,7 +102,7 @@ resource "yandex_compute_instance" "vm_db_platform" {
     preemptible = true
   }
   network_interface {
-    subnet_id = yandex_vpc_subnet.vm_web_develop.id
+    subnet_id = yandex_vpc_subnet.vm_db_develop.id
     nat       = true
   }
 
