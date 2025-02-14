@@ -21,7 +21,7 @@ resource "yandex_compute_instance" "vms_copy" {
   network_interface {
     subnet_id           = yandex_vpc_subnet.develop.id
     security_group_ids  = [yandex_vpc_security_group.example.id]
-    nat = true
+    nat = false
   } 
   metadata = {
     serial-port-enable = var.ssh_all.ssh_vm.serial_port

@@ -22,9 +22,9 @@ resource "yandex_compute_instance" "vm_storage" {
    }
   }
   resources {
-   cores         = 2
-   memory        = 2
-   core_fraction = 5
+   cores         = var.vm_storage.vm.cores
+   memory        = var.vm_storage.vm.ram
+   core_fraction = var.vm_storage.vm.core_fraction
   }
   
 

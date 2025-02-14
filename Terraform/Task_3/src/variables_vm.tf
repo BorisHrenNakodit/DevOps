@@ -11,18 +11,12 @@ variable "disk_type" {
   default = "your type"
 }
 variable "count_vms" {
-    type = map(object({
-      cores         =number
-      ram           =number
-      core_fraction =number
-    }))
-    default = {
-      vm={
-        cores           =2
-        ram             =2
-        core_fraction   =5
-      }      
-    }  
+  type = map(object({
+    cores         =number
+    ram           =number
+    core_fraction =number
+  }))
+      
 }
 
 variable "each_vm" {
@@ -32,6 +26,13 @@ variable "each_vm" {
     ram           = number
     core_fraction = number
     disk_volume   = number
+  }))
+}
+variable "vm_storage" {
+  type = map(object({
+    cores         =number
+    ram           =number
+    core_fraction =number
   }))
 }
 

@@ -11,4 +11,12 @@ resource "local_file" "hosts_templatefile" {
 
 }
 
+resource "null_resource" "ansible_playbook" {
+  depends_on = [ yandex_compute_instance.vm_storage,yandex_compute_instance.vms_copy,yandex_compute_instance.vms_dataBase ]
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i inventotory test.yml" 
+  }
+}
+
  
