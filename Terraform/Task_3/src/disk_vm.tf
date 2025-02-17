@@ -16,9 +16,9 @@ resource "yandex_compute_instance" "vm_storage" {
     }
   }
   dynamic "secondary_disk" {
-   for_each = "${yandex_compute_disk.disk_count.*.id}"
+   for_each = yandex_compute_disk.disk_count
    content {
-     disk_id = yandex_compute_disk.disk_count["${secondary_disk.key}"].id
+     disk_id = lookup(secondary_disk.value,"id",null)
    }
   }
   resources {

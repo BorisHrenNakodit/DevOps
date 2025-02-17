@@ -4,7 +4,7 @@ data "yandex_compute_image" "vm_image" {
 
 resource "yandex_compute_instance" "vms_copy" {
   count = 2
-  name  = "web-${count.index}"
+  name  = "web-${count.index+1}"
   depends_on = [ yandex_compute_instance.vms_dataBase ]
   
   resources {
