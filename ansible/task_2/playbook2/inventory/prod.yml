@@ -1,0 +1,10 @@
+---
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_host: 158.160.115.38
+      ansible_user: deb
+      
+      #ansible_connection: docker
+      #ansible_user: cent
+      ansible_ssh_private_key_file: /home/Ioan/.ssh/id_ansible
