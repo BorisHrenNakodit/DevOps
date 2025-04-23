@@ -1,0 +1,9 @@
+---
+- name: Vector
+  hosts: clickhouse
+  roles:
+    - vector-role
+- name: Install Clickhouse
+  hosts: clickhouse
+  roles:
+    - clickhouse_deb
