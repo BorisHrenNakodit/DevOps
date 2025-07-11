@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://kubri.dev/schema.json": "file:///home/Ioan/Git_repository/DevOps/Kubernetes/task_3/depl.yaml"
+    }
+}

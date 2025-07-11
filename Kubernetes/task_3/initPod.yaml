@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: init-dep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: init
+  template: 
+    metadata:
+      labels:
+        app: init
+    spec:
+      containers:
+      - name: init-nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+      initContainers:
+      - name: init-busy
+        image: busybox
+        command: ['sh', '-c', "until nslookup servise-init.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for servise-init; sleep 2; done"]
+
