@@ -30,7 +30,8 @@
 4. Продемонстрировать доступ с помощью `curl` по доменному имени сервиса.
 5. Предоставить манифесты Deployment и Service в решении, а также скриншоты или вывод команды п.4.
 6. 
-[Манифест файл nginx, multitool и Pod multitool-p ](depl.yaml)
+[Манифест файл nginx, multitool и Pod multitool-p ](./deployment.yaml)
+
 [Манифест файл Service ClusterIP](./svc-dep.yaml)
 
 ![2](./img/2.jpg)
