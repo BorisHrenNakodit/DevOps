@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ntd
+spec:
+  selector:
+    matchLabels:
+      app: nt
+  template:
+    metadata:
+      labels:
+        app: nt
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - name: port-ngx
+          containerPort: 80
+      - name: multitool
+        image: wbitt/network-multitool
+        ports:
+        - name: port-mul
+          containerPort: 8080
+        env: 
+          - name: HTTP_PORT
+            value: "11443"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multitool-d
+spec:
+  selector:
+    matchLabels:
+      app: mt
+  template:
+    metadata:
+      labels:
+        app: mt
+    spec:
+      containers:
+      - name: multitool
+        image: wbitt/network-multitool
+        ports:
+        -  containerPort: 8080
+        env: 
+          - name: HTTP_PORT
+            value: "11443"
+
