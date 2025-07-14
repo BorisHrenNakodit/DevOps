@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: d-nginx
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: ng
