@@ -53,7 +53,7 @@
 
 [Манифест файл Ingress](./ingress.yaml)
 
-![2](/img/2.jpg)
+![2](./img/2.jpg)
 
 ![3](./img/3.jpg)
 
