@@ -6,5 +6,9 @@ spec:
   selector:
     app: ng
   ports:
-  - port: 8001
+  - name: ngi
+    port: 8001
     targetPort: nginx-port
+  - name: multitool
+    port: 8080
+    targetPort: port-mul

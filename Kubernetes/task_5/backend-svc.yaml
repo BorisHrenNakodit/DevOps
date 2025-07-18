@@ -7,4 +7,4 @@ spec:
     app: tools
   ports:
   - port: 8002
-    targetPort: tools-port
+    targetPort: 11443

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: ds-multitool
+  namespace: netol
+spec:
+  selector:
+    matchLabels:
+      name: tools
+  template:
+    metadata:
+      labels:
+        name: tools
+    spec:
+      containers:
+      - name: multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+          - name: hostlog
+            mountPath: /host/var/log/syslog/
+            readOnly: true
+      volumes:
+      - name: hostlog
+        hostPath:
+          path: /var/snap/microk8s/common/var/log/calico/cni/
+
+        

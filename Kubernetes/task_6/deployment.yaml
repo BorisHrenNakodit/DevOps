@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-busytool
+  namespace: netol
+spec:
+  selector:
+    matchLabels:
+      app: busytool
+  template:
+    metadata:
+      labels:
+        app: busytool
+    spec:
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+      containers:
+      - name: busybox
+        image: busybox
+        command: ["/bin/sh"]
+        args: ["-c","while true; do echo busybox: $(date)> /volulog/log.txt;sleep 5; done"]
+        volumeMounts:
+          - name: log-volume
+            mountPath: /volulog        
+      - name: multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+          - name: log-volume
+            mountPath: /volulog
+        ports:
+        - name: multitool-port
+          containerPort: 8080
+        env:
+          - name: HTTP_PORT
+            value: "11443"
