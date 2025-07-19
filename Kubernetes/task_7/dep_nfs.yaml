@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-tool
+  namespace: netol
+spec:
+  selector:
+    matchLabels:
+      app: tool
+  template:
+    metadata:
+      labels:
+        app: tool
+    spec:
+      volumes:
+        - name: log-volume
+          persistentVolumeClaim:
+            claimName: nfs-claim
+      containers:
+      - name: multitool
+        image: wbitt/network-multitool
+        volumeMounts:
+          - name: log-volume
+            mountPath: /volulog
