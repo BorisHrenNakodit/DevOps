@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-ngtool
+  namespace: netol
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      volumes:
+      - name: index-file
+        configMap:
+         name: ng-index
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+          name: ng-port
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/index.html
+          subPath: index.html
+          name: index-file

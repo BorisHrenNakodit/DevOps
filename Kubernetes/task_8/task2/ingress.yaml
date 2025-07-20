@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+  name: myingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: mytask8.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: sv-nginx
+            port: 
+              number: 80
+  tls:
+    - hosts:
+      - mytask8.com
+      secretName: tls-secret
