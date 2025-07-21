@@ -38,7 +38,7 @@
 ```
 ### генерируем ключ
 
-openssl genrsa -out ioan.key 2048 
+openssl genrsa -out testioan.key 2048 
 
 
 ### генерацию запроса на сертификат
