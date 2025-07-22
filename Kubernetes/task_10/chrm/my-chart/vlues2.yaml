@@ -1,0 +1,11 @@
+replicaCount: 1
+namespace: app2
+image:
+  repository: nginx
+  version: latest
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 80
+
