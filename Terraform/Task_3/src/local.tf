@@ -1,5 +1,6 @@
 locals {
   ssh_connect   ="${var.ssh_all.ssh_vm.ssh_user}:${file(var.ssh_all.ssh_vm.ssh_path)}"
+  
   vps       ={
     "network_id" = "enp7i560tb28nageq0cc"
     "subnet_ids" = [

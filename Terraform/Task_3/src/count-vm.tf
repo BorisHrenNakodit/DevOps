@@ -24,8 +24,9 @@ resource "yandex_compute_instance" "vms_copy" {
     nat = false
   } 
   metadata = {
-    serial-port-enable = var.ssh_all.ssh_vm.serial_port
-    ssh-keys           = local.ssh_connect
+     user-data = "#cloud-config\nusers:\n  - name: ${var.vm_user}\n    groups: sudo\n    shell: /bin/bash\n    sudo: 'ALL=(ALL) NOPASSWD:ALL'\n    ssh-authorized-keys:\n      - ${file("${var.ssh_all.ssh_path}")}"
+    # serial-port-enable = var.ssh_all.ssh_vm.serial_port
+    # ssh-keys           = local.ssh_connect
   }
   scheduling_policy {
     preemptible = true
