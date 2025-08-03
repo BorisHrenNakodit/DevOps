@@ -7,15 +7,17 @@ resource "yandex_storage_bucket" "bucket_image" {
       list = true
       config_read = true
     }
-  #   server_side_encryption_configuration {
-  #  rule {
-  #     apply_server_side_encryption_by_default {
-  #       kms_master_key_id = yandex_kms_symmetric_key.key-monkey.id
-  #       sse_algorithm     = "aws:kms"
-  #     }
-  #   }
-  # }
+    server_side_encryption_configuration {
+   rule {
+      apply_server_side_encryption_by_default {
+        kms_master_key_id = yandex_kms_symmetric_key.key-monkey.id
+        sse_algorithm     = "aws:kms"
+      }
+    }
+  }
 }
+
+
 resource "yandex_storage_object" "monkey" {
   content_type = "image/jpeg"
   depends_on = [ yandex_storage_bucket.bucket_image ]
