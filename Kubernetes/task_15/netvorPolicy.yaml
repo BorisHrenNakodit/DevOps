@@ -1,0 +1,50 @@
+### ЗАПРЕЩАЕМ ВЕСЬ ТРАФИК ВНУТРИ NAMESPACE
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: 
+  name: n-front-back
+  namespace: net
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+
+#РАЗРЕШАЕМ ТРАФИК ДО ПОДОВ С lable BACK ПОДАМ С lable FRONT
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: 
+  name: np-front-back
+  namespace: net
+spec:
+  podSelector:
+    matchLabels:
+      app: back
+  ingress:
+  - from: 
+    - podSelector:
+        matchLabels:
+          app: front
+  policyTypes:
+  - Ingress
+
+
+#РАЗРЕШАЕМ ТРАФИК ДО ПОДОВ С lable CACH ПОДАМ С lable BACK
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: 
+  name: np-back-cach
+  namespace: net
+spec:
+  podSelector:
+    matchLabels:
+      app: cach
+  ingress:
+  - from: 
+    - podSelector:
+        matchLabels:
+          app: back
+  policyTypes:
+  - Ingress

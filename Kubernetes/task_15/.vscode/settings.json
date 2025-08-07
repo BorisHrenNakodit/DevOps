@@ -1,0 +1,8 @@
+{
+    "yaml.schemas": {
+        "https://kubri.dev/schema.json": [
+            "file:///home/Ioan/Git_repository/DevOps/Kubernetes/task_15/pods.yaml",
+            "file:///home/Ioan/Git_repository/DevOps/Kubernetes/task_15/netvorPolicy.yaml"
+        ]
+    }
+}

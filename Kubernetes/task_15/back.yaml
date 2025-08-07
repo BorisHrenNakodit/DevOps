@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: d-back
+  namespace: net
+spec:
+  selector:
+    matchLabels:
+      app: back
+  template:
+    metadata:
+      labels:
+        app: back
+    spec:
+      containers:
+      - name: backend
+        image: wbitt/network-multitool
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env:
+          - name: HTTP_PORT
+            value: "11443"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: s-back
+  namespace: net
+spec:
+  selector:
+    app: back
+  ports:
+  - port: 81
+    targetPort: 11443
