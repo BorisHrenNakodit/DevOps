@@ -19,18 +19,13 @@ resource "yandex_iam_service_account_static_access_key" "sa_key_editor" {
 }
 
 
-# resource "yandex_resourcemanager_folder_iam_member" "bucket_editor" {
-#   folder_id = var.folder_id
-#   role = "storage.editor"
-#   member = "serviceAccount:${yandex_iam_service_account.account-editor.id}"
-# }
-
 resource "yandex_iam_service_account_key" "sa_key_file" {
   service_account_id = yandex_iam_service_account.account-editor.id
   key_algorithm = "RSA_2048"
   description = "ключ авторизации в клауд"
 }
 
+### создание service_account_key_file
 resource "local_file" "get_key" {
   filename = "/home/Ioan/Git_repository/DevOps/Diplom/main/key.json"
   content  = jsonencode({
