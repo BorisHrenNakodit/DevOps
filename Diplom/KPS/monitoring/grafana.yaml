@@ -1,0 +1,6 @@
+grafana:
+  adminPassword: "G13n80"
+  service:
+    type: NodePort
+    nodePort: 32222
+    portname: http-web

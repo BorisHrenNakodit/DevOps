@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/terrateamio/terrateam/refs/heads/main/api_schemas/terrat/config-schema.json": "file:///home/Ioan/Git_repository/DevOps/Diplom/prep/service-account.yaml"
+    }
+}

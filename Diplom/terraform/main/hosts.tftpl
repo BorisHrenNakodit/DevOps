@@ -1,0 +1,39 @@
+all:
+    hosts:
+    
+%{~ for v in vms ~}
+%{~ if !startswith(v.name, "jenkins") ~}
+        ${v["name"]}:
+            ansible_host: ${v["network_interface"][0]["nat_ip_address"]}
+            ansible_user: debian
+            ansible_ssh_private_key_file: ~/.ssh/id_ansible
+            ansible_python_interpreter: /usr/bin/python3
+
+%{~ endif ~}
+%{~ endfor ~}
+
+    children:
+        kube_control_plane:
+            hosts:
+%{~ for v in vms ~}
+                ${startswith(v["name"], "master") ? "\n               ${v["name"]}:" : ""}
+%{~ endfor ~}
+
+        etcd:
+            hosts:
+%{~ for v in vms ~}
+                ${startswith(v["name"], "master") ? "\n               ${v["name"]}:" : ""}
+%{~ endfor ~}
+
+        kube_node:
+            hosts:
+%{~ for v in vms ~}
+                ${startswith(v["name"], "node") ? "\n               ${v["name"]}:" : ""}
+%{~ endfor ~}
+
+        k8s_cluster:
+            children:
+                kube_control_plane:
+                kube_node:
+        calico_rr:
+            hosts: {}
